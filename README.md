@@ -31,6 +31,19 @@ blaze rules.yaml
 
 A rules.json will be generated which you can upload to Firebase!
 
+### Programmatic access
+
+```
+var compiler = require('blaze_compiler'),
+    compiledString = '',
+    debug = true;
+
+compiledString = compiler.compile('path/to/rules.yaml', debug);
+compiledString = compiler.compileYAML(yamlString, debug);
+```
+
+*****
+
 You can find more about the [functions](#functions), [simpler rule expressions](#simple-security-expressions), the [schema definitions](#schema), [access control](#access-control) or [inline tests](#inline-testing).
 
 ## Functions
@@ -110,7 +123,7 @@ schema:
 
 In the above example you could set `{string_child: "blah"}` at the root of the Firebase but not `{string_child: true}`
 
-You can leave a schema unspecified with {} or with type: "any". 
+You can leave a schema unspecified with {} or with type: "any".
 
 #### required
 
@@ -157,7 +170,7 @@ schema:
   minimum:  0
   maximum: 10
   exclusiveMaximum: true
-  
+
   examples:
     - 0
     - 9.9
@@ -178,7 +191,7 @@ schema:
       $userid: {}
 ```
 
-The use of a wildchild prevents all ascendents from being writable.  
+The use of a wildchild prevents all ascendents from being writable.
 
 #### ~$wilderchild
 
@@ -371,17 +384,20 @@ access:
 - 20th November 2014:
   - optimizations added to reduce code bloat
   - sensitization bug regarding regexes fixed
-  
-- 28th August 2014:ß
+
+- 15th October 2014:
+  - added compileYAML method to compiler and moved file writing to cli
+
+- 28th August 2014:
   - range constraints for number type added
-  
+
 - 26th August 2014:
   - wilderchilds introduced, ~$ allows nullable wildchilds whose parents can be written to.
   - sanitized expressions bug fix
 
 - 18th August 2014:
   - predicates renamed to functions
-  
+
 - 14th July 2014:
   - improved error reporting
   - updated installation
@@ -392,4 +408,4 @@ access:
 - 30th June 2014:
   - removed trailing /* from access location syntax
   - allowed untyped schema if type is not specified
-  
+

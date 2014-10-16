@@ -4,11 +4,10 @@ import schema = require('../src/schema');
 import blaze = require('./blaze');
 import Json  = require('source-processor');
 import expression = require('../src/expression');
-import fs = require('fs');
 
 var debug_intermediates = true;
 /**
- * compiles a json object into an annotated model of rules, then writes it to file in rules.json
+ * compiles a json object into an annotated model of rules
  * return null if failed, or the model
  */
 export function compileJSON(json: Json.JValue, debug: boolean): blaze.Rules {
@@ -63,9 +62,6 @@ export function compileJSON(json: Json.JValue, debug: boolean): blaze.Rules {
             console.log("\ngenerated code:");
             console.log(code);
         }
-        //write to file
-        console.log("\nwriting rules.json");
-        fs.writeFileSync("rules.json", code);
         model.code = code;
         return model;
 
@@ -88,6 +84,14 @@ export function compileJSON(json: Json.JValue, debug: boolean): blaze.Rules {
     }
 }
 
+export function compileYAML(yaml: string, debug: boolean): blaze.Rules{
+    blaze.debug = debug;
+
+    var json: Json.JValue = Json.parse_yaml(yaml);
+    return compileJSON(json, debug);
+
+}
+
 export function compile(path: string, debug: boolean): blaze.Rules{
     blaze.debug = debug;
 
@@ -100,3 +104,4 @@ export function compile(path: string, debug: boolean): blaze.Rules{
     return compileJSON(json, debug);
 
 }
+

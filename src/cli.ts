@@ -2,6 +2,7 @@
 /// <reference path="../types/optimist.d.ts" />
 require('source-map-support').install();
 import compiler = require('./compiler');
+import fs = require('fs');
 var configured_optimist = require('optimist')
     .usage([
         'run:-',
@@ -23,6 +24,11 @@ if(file){
 
     console.log("transpiling", file);
     var model = compiler.compile(file, argv['v']);
+
+    //write to file
+    console.log("\nwriting rules.json");
+    fs.writeFileSync("rules.json", model.code);
+
     if (argv['java']) require('./java/java').generate(model, argv['v'])
 } else {
     configured_optimist.showHelp()

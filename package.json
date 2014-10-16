@@ -4,7 +4,7 @@
   "description": "Transpiles extendable, schema orientated definitions into Firebase security rules",
   "author": "Tom Larkworthy",
   "license": "private",
-  "main": "blaze.js",
+  "main": "./src/compiler.js",
   "bin": {
     "blaze": "./bin/blaze.js"
   },
