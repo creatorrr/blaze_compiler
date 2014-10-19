@@ -13,7 +13,8 @@
     "url": "https://github.com/firebase/blaze_compiler"
   },
   "scripts": {
-    "prepublish": "grunt compile"
+    "prepublish": "grunt compile",
+    "postinstall": "./node_modules/.bin/grunt compile"
   },
   "dependencies": {
     "optimist": "~0.6.1",
@@ -21,9 +22,7 @@
     "source-processor": "0.0.6",
     "tv4": "1.0.16",
     "falafel": "0.3.1",
-    "source-map-support": "0.2.7"
-  },
-  "devDependencies": {
+    "source-map-support": "0.2.7",
     "async": "0.7.0",
     "firebase": "1.0",
     "firebase-token-generator": "0.1.4",
